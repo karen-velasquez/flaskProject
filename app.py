@@ -4,14 +4,12 @@ from flask import Flask, flash, request, redirect, url_for, render_template, Res
 from werkzeug.utils import secure_filename
 
 '''Las librerias'''
-import math
 import cv2
 import numpy as np
 from time import time
 import mediapipe as mp
 import pandas as pd
 import pickle
-import csv
 
 UPLOAD_FOLDER = 'static/uploads/'
 
