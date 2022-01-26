@@ -1,24 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Videostreaming</title>
-    <style>
-        .container{
-            margin:0;
-            padding:0;
-            width:100%;
-            height:100vh;
-            background-color:#E2D8F8;
-            color: black;
-            text-align:center;
-        }
-    </style>
-
+    <title>Say Hello</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
-<body class="container">
-    <h1>video en DIRECTO</h1>
-    <img src="{{ url_for('video_feed') }}">
+<body>
+    <img src="https://raw.githubusercontent.com/MariyaSha/SimpleGreetingApp/main/logo.png">
+    <br>
+    <form action="greet" method="post">
+        {% for message in get_flashed_messages() %}
+             <p>{{ message }}</p>
+         {% endfor %}
+        <br>
+        <input type="text" name="name_input">
+        <br>
+        <input type="submit" value="GREET" id="greet">
+    </form>
 </body>
 </html>
