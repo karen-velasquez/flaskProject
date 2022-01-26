@@ -12,8 +12,6 @@ import mediapipe as mp
 import pandas as pd
 import pickle
 import csv
-#importando la precision de prediccion
-from sklearn.metrics import accuracy_score
 
 UPLOAD_FOLDER = 'static/uploads/'
 
