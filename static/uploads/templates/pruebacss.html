@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+   
+    <title> WUSHU ANALYSIS </title>
+    <link rel="stylesheet" type="text/css" href="static/uploads/templates/css/style.css">
+</head>
+<body>
+    <section>
+        <div class="container">
+            <header>
+                <a href="#" class="logo">ANALISIS POSTURAS WUSHU</a>
+                <ul>
+                    <li><a href="templates/pruebacss.html" class="active">Home</a></li>
+                    <li><a href="static/uploads/templates/web2.html">UIE</a></li>
+                    <li><a href="static/uploads/templates/index3.html">NTXUCB</a></li>
+                    <li><a href="https://github.com/uieucb/pose-estimation-AI">Github</a></li>
+                </ul>
+            </header>
+            <div class="content">
+                <h2>WUSHU</h2>
+                <p>Es una exposición y un deporte de contacto completo derivado de las artes marciales 
+                    chinas tradicionales. Fue desarrollado en China a partir de 1949, en un esfuerzo para
+                     estandarizar la práctica de las artes marciales tradicionales chinas
+                </p>
+                <p>
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                          <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                </p>
+                <form method="post" action="/" enctype="multipart/form-data">
+                    <input type="file" name="file" autocomplete="off" required>
+                    <!-- <div class="file-upload">
+                            <input type="file" type="file" name="file[]" id="file">
+                            <button class="file_button" type="button">Choose</button>
+                            <span class="file_label">No file selected</span>
+            
+                        </div>-->
+                    <input type="submit" value="Upload">
+                </form>
+                
+            </div>
+            <div class="imgBx"> 
+                {% if filename %}
+                    <img src="{{ url_for('video_feed', filename=filename) }}">
+                {% else %}
+                    <img src="static/uploads/templates/css/images/kunfu1.png">
+                {% endif %}
+
+                <!--<img src="{{ url_for('video_feed', filename=filename) }}">-->
+                <!--<img src="static/uploads/css/images/kunfu1.png">-->
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+</html>
