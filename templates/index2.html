@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+   
+    <title>Hexagon</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style2.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">ANALISIS POSTURAS WUSHU</a>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="index2"  class="active">UIE</a></li>
+                <li><a href="https://github.com/uieucb/pose-estimation-AI">Github</a></li>
+            </ul>
+        </header>
+        <div class="hexagon">
+            <div class="shape">
+                <img src="{{ url_for('static', filename='css/images/uie1.jpg') }}">
+                <div class="content">
+                    <div>
+                        <h2>UNIDAD DE INVESTIGACIÓN EXPERIMENTAL (UIE) </h2>
+                        <p>Es un Centro de Investigaciones del Departamento de Psicología de la Universidad Católica Boliviana “San Pablo”
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hexagon">
+            <div class="shape">
+                <img src="{{ url_for('static', filename='css/images/uie2.jpeg') }}">
+                <div class="content">
+                    <div>
+                        <h2>Propósito</h2>
+                        <p>Abrir nuevos espacios de investigación experimental para docentes y estudiantes interesados en las ciencias del comportamiento. Busca la producción y la difusión científica de alto nivel promoviendo:
+                            <br>- La formación especializada en pre y postgrado
+                            <br>- La producción científica
+                            <br>- La interdisciplina
+                            <br>- La internacionalización 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hexagon">
+            <div class="shape">
+                <img src="{{ url_for('static', filename='css/images/uie3.png') }}">
+                <div class="content">
+                    <div>
+                        <h2>Líneas de investigación</h2>
+                        <p>La UIE trabaja actualmente en las siguientes líneas de investigación:
+                            <br>- Pensamiento Moral 
+                            <br>- Farmacología comportamental 
+                            <br>- Neuropsicología, ciencia cognitiva y procesos clínicos 
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -2,20 +2,64 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Say Hello</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>Pose estimation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <img src="https://raw.githubusercontent.com/MariyaSha/SimpleGreetingApp/main/logo.png">
-    <br>
-    <form action="greet" method="post">
-        {% for message in get_flashed_messages() %}
-             <p>{{ message }}</p>
-         {% endfor %}
-        <br>
-        <input type="text" name="name_input">
-        <br>
-        <input type="submit" value="GREET" id="greet">
-    </form>
+    <section>
+        <div class="container">
+            <header>
+                <a href="#" class="logo">ANALISIS POSTURAS WUSHU</a>
+                <ul>
+                    <li><a href="/" class="active">Home</a></li>
+                    <li><a href="index2">UIE</a></li>
+                    <li><a href="https://github.com/uieucb/pose-estimation-AI">Github</a></li>
+                </ul>
+            </header>
+            <div class="content">
+                <h2>WUSHU</h2>
+                <p>Es una exposición y un deporte de contacto completo derivado de las artes marciales 
+                    chinas tradicionales. Fue desarrollado en China a partir de 1949, en un esfuerzo para
+                     estandarizar la práctica de las artes marciales tradicionales chinas
+                </p>
+                <p>
+                    {% with messages = get_flashed_messages() %}
+                      {% if messages %}
+                        <ul>
+                        {% for message in messages %}
+                          <li>{{ message }}</li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+                    {% endwith %}
+                </p>
+                <form method="post" action="/" enctype="multipart/form-data">
+                    <input type="file" name="file" autocomplete="off" required>
+                    <!-- <div class="file-upload">
+                            <input type="file" type="file" name="file[]" id="file">
+                            <button class="file_button" type="button">Choose</button>
+                            <span class="file_label">No file selected</span>
+            
+                        </div>-->
+                    <input type="submit" value="Upload">
+                </form>
+                
+            </div>
+            <div class="imgBx"> 
+                {% if filename %}
+                    <img src="{{ url_for('video_feed', filename=filename) }}">
+                {% else %}
+                    <img src="{{ url_for('static', filename='css/images/kunfu1.png') }}">
+                {% endif %}
+
+            </div>
+            <ul class="sci">
+                <li><a href="#"><img src="{{ url_for('static', filename='css/images/facebook.png') }}"></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='css/images/youtube.png') }}"></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='css/images/twitter.png') }}"></a></li>
+                
+            </ul>
+        </div>
+    </section>
 </body>
 </html>
