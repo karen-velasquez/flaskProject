@@ -1,4 +1,6 @@
+from msilib.schema import Directory
 import os
+import shutil
 import urllib.request
 from flask import Flask, flash, request, redirect, url_for, render_template, Response
 from werkzeug.utils import secure_filename
@@ -12,11 +14,27 @@ import pandas as pd
 import pickle
 
 UPLOAD_FOLDER = 'static/uploads/'
+DELETE_FOLDER='static/uploads'
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+
+
+
+def delete_create():
+	#Eliminando la carpeta
+	shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
+
+	#Creando la carpeta
+	directory = "uploads"
+	parent_dir = "static/"
+	path = os.path.join(parent_dir, directory)
+	os.mkdir(path)
+
+
 
 def gen(filename): 
     #abrimos el modelo guardado
@@ -30,7 +48,7 @@ def gen(filename):
     #1. GET REALTIME WEBCAM FEED------------------------------
     #capturamos el dispositivo y le pasamos el numero de dispositivo del webcam
     #VIDEO FEED
-    cap=cv2.VideoCapture(UPLOAD_FOLDER+filename)
+    cap=cv2.VideoCapture('static/uploads/'+filename)
     #nombre='wushu2.mp4'
     # Initialize the VideoCapture object to read from a video stored in the disk.
     #cap = cv2.VideoCapture('myvideo/examples/'+nombre)
@@ -209,14 +227,17 @@ def gen(filename):
 
 @app.route('/')
 def upload_form():
+	delete_create()
 	return render_template("index.html")
 
 @app.route('/index2')
 def index2():
+	delete_create()
 	return render_template("index2.html")
 
 @app.route('/', methods=['POST'])
 def upload_video():
+	delete_create()
 	if 'file' not in request.files:
 		flash('No file part')
 		return redirect(request.url)
@@ -228,8 +249,8 @@ def upload_video():
 		filename = secure_filename(file.filename)
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 		#print('upload_video filename: ' + filename)
-		flash('Video successfully uploaded and displayed below')
-		return render_template("index.html")
+		flash('Reproduciendo video')
+		return render_template("index.html", filename=filename)
 
 @app.route('/display/<filename>')
 def display_video(filename):
@@ -239,6 +260,3 @@ def display_video(filename):
 def video_feed(filename):
     return Response(gen(filename),
                     mimetype="multipart/x-mixed-replace; boundary=frame")
-
-if __name__ == "__main__":
-    app.run(debug=False)
