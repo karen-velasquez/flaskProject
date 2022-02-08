@@ -1,4 +1,4 @@
-from msilib.schema import Directory
+# from msilib.schema import Directory
 import os
 import shutil
 import urllib.request
