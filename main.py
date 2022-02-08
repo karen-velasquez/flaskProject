@@ -1,5 +1,4 @@
 # from msilib.schema import Directory
-from genericpath import exists
 import os
 import shutil
 import urllib.request
@@ -33,7 +32,9 @@ def delete_create():
 	directory = "uploads"
 	parent_dir = "static/"
 	path = os.path.join(parent_dir, directory)
-	os.mkdir(path, exists_ok = True)
+	if os.path.exists(path):
+         shutil.rmtree(path)
+        os.mkdir(path)
 
 
 
