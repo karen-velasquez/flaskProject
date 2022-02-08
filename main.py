@@ -25,16 +25,16 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 def delete_create():
-	#Eliminando la carpeta
-	shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
+    #Eliminando la carpeta
+    shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
 
-	#Creando la carpeta
-	directory = "uploads"
-	parent_dir = "static/"
-	path = os.path.join(parent_dir, directory)
-	if os.path.exists(path):
-         shutil.rmtree(path)
-        os.mkdir(path)
+    #Creando la carpeta
+    directory = "uploads"
+    parent_dir = "static/"
+    path = os.path.join(parent_dir, directory)
+    if os.path.exists(path):
+        shutil.rmtree(path)
+    os.mkdir(path)
 
 
 
@@ -229,34 +229,34 @@ def gen(filename):
 
 @app.route('/')
 def upload_form():
-	delete_create()
-	return render_template("index.html")
+    delete_create()
+    return render_template("index.html")
 
 @app.route('/index2')
 def index2():
-	delete_create()
-	return render_template("index2.html")
+    delete_create()
+    return render_template("index2.html")
 
 @app.route('/', methods=['POST'])
 def upload_video():
-	delete_create()
-	if 'file' not in request.files:
-		flash('No file part')
-		return redirect(request.url)
-	file = request.files['file']
-	if file.filename == '':
-		flash('No image selected for uploading')
-		return redirect(request.url)
-	else:
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		#print('upload_video filename: ' + filename)
-		flash('Reproduciendo video')
-		return render_template("index.html", filename=filename)
+    delete_create()
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    else:
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #print('upload_video filename: ' + filename)
+        flash('Reproduciendo video')
+        return render_template("index.html", filename=filename)
 
 @app.route('/display/<filename>')
 def display_video(filename):
-	return redirect(url_for('static', filename='uploads/' + filename), code=301)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 @app.route("/video_feed/<filename>")
 def video_feed(filename):
