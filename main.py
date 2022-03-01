@@ -13,8 +13,8 @@ import mediapipe as mp
 import pandas as pd
 import pickle
 
-UPLOAD_FOLDER = 'static/uploads/'
-DELETE_FOLDER='static/uploads'
+UPLOAD_FOLDER = 'static/tmp/'
+DELETE_FOLDER='static/tmp'
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -29,7 +29,7 @@ def delete_create():
     shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
 
     #Creando la carpeta
-    directory = "uploads"
+    directory = "tmp"
     parent_dir = "static/"
     path = os.path.join(parent_dir, directory)
     if os.path.exists(path):
@@ -50,7 +50,7 @@ def gen(filename):
     #1. GET REALTIME WEBCAM FEED------------------------------
     #capturamos el dispositivo y le pasamos el numero de dispositivo del webcam
     #VIDEO FEED
-    cap=cv2.VideoCapture('static/uploads/'+filename)
+    cap=cv2.VideoCapture('static/tmp/'+filename)
     #nombre='wushu2.mp4'
     # Initialize the VideoCapture object to read from a video stored in the disk.
     #cap = cv2.VideoCapture('myvideo/examples/'+nombre)
@@ -256,7 +256,7 @@ def upload_video():
 
 @app.route('/display/<filename>')
 def display_video(filename):
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+    return redirect(url_for('static', filename='tmp/' + filename), code=301)
 
 @app.route("/video_feed/<filename>")
 def video_feed(filename):
