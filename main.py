@@ -13,6 +13,8 @@ import mediapipe as mp
 import pandas as pd
 import pickle
 
+import glob
+
 UPLOAD_FOLDER = 'static/tmp/'
 DELETE_FOLDER='static/tmp'
 
@@ -25,16 +27,24 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 def delete_create():
+    py_files = glob.glob('static/tmp/*.mp4')
+
+    for py_file in py_files:
+        try:
+            os.remove(py_file)
+        except OSError as e:
+            print(f"Error:{ e.strerror}")
+
     #Eliminando la carpeta
-    shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
+    #shutil.rmtree(DELETE_FOLDER, ignore_errors=True)
 
     #Creando la carpeta
-    directory = "tmp"
-    parent_dir = "static/"
-    path = os.path.join(parent_dir, directory)
-    if os.path.exists(path):
-        shutil.rmtree(path)
-    os.mkdir(path)
+    #directory = "tmp"
+    #parent_dir = "static/"
+    #path = os.path.join(parent_dir, directory)
+    #if os.path.exists(path):
+    #    shutil.rmtree(path)
+    #os.mkdir(path)
 
 
 
