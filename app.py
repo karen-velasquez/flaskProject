@@ -15,8 +15,8 @@ import pickle
 
 import glob
 
-UPLOAD_FOLDER = 'static/tmp/'
-DELETE_FOLDER='static/tmp'
+UPLOAD_FOLDER = 'tmp/'
+DELETE_FOLDER='tmp'
 
 app = Flask(__name__)
 app.secret_key = "secret key"
@@ -27,7 +27,7 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 def delete_create():
-    py_files = glob.glob('static/tmp/*.mp4')
+    py_files = glob.glob('tmp/*.mp4')
 
     for py_file in py_files:
         try:
@@ -60,7 +60,7 @@ def gen(filename):
     #1. GET REALTIME WEBCAM FEED------------------------------
     #capturamos el dispositivo y le pasamos el numero de dispositivo del webcam
     #VIDEO FEED
-    cap=cv2.VideoCapture('static/tmp/'+filename)
+    cap=cv2.VideoCapture('tmp/'+filename)
     #nombre='wushu2.mp4'
     # Initialize the VideoCapture object to read from a video stored in the disk.
     #cap = cv2.VideoCapture('myvideo/examples/'+nombre)
@@ -258,6 +258,7 @@ def upload_video():
         flash('No image selected for uploading')
         return redirect(request.url)
     else:
+        #filename = uuid.uuid4()
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         #print('upload_video filename: ' + filename)
@@ -266,7 +267,7 @@ def upload_video():
 
 @app.route('/display/<filename>')
 def display_video(filename):
-    return redirect(url_for('static', filename='tmp/' + filename), code=301)
+    return redirect(url_for('tmp', filename='/' + filename), code=301)
 
 @app.route("/video_feed/<filename>")
 def video_feed(filename):
